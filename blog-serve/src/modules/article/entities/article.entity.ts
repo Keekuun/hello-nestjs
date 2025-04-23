@@ -23,11 +23,11 @@ export class Article {
   author: string;
 
   // 创建时间
-  @CreateDateColumn({name: 'createTime'})
+  @CreateDateColumn()
   createTime: Date;
 
   // 更新时间
-  @UpdateDateColumn({name: 'updateTime'})
+  @UpdateDateColumn()
   updateTime: Date;
 
   // 是否删除
