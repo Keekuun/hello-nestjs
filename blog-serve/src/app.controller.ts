@@ -7,10 +7,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(@Res({ passthrough: true }) res: Response) {
-    res.status(HttpStatus.OK);
-    return {
-      message: this.appService.getHello(),
-    };
+  getHello() {
+    return this.appService.getHello();
   }
 }

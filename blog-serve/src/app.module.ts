@@ -4,11 +4,11 @@ import { AppService } from './app.service';
 import { ArticleModule } from './modules/article/article.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
 
-const PostgresqlModule = TypeOrmModule.forRoot({
+const DatabaseModule = TypeOrmModule.forRoot({
   type: 'postgres',
   host: 'localhost',
   port: 5432,
-  username: 'postgres',
+  username: 'root',
   password: '123456',
   database: 'nestjs-blog-serve',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
@@ -17,7 +17,7 @@ const PostgresqlModule = TypeOrmModule.forRoot({
 
 @Module({
   imports: [
-    PostgresqlModule,
+    DatabaseModule,
     ArticleModule
   ],
   controllers: [AppController],
