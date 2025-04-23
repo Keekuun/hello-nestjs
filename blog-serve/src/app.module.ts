@@ -3,14 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticleModule } from './modules/article/article.module';
 import {TypeOrmModule} from "@nestjs/typeorm";
-import { DefaultNamingStrategy, NamingStrategyInterface } from 'typeorm';
-
-// 自定义命名策略
-class CustomNamingStrategy extends DefaultNamingStrategy implements NamingStrategyInterface {
-  columnName(propertyName: string): string {
-    return propertyName;
-  }
-}
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 const DatabaseModule = TypeOrmModule.forRoot({
   type: 'postgres',
@@ -21,7 +14,7 @@ const DatabaseModule = TypeOrmModule.forRoot({
   database: 'nestjs-blog-serve',
   entities: [__dirname + '/**/*.entity{.ts,.js}'],
   synchronize: true,
-  namingStrategy: new CustomNamingStrategy(),
+  namingStrategy: new SnakeNamingStrategy(),
 });
 
 @Module({
