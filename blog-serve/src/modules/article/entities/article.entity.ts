@@ -39,6 +39,6 @@ export class Article {
   version: number;
 
   // 文章标签
-  @Column('simple-array')
+  @Column('simple-array', { nullable: true })
   tags: string[];
 }

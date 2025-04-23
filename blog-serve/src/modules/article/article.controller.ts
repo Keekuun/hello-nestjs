@@ -26,17 +26,17 @@ export class ArticleController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.articleService.findOne(id);
+  findOne(@Param('id') id: string) {
+    return this.articleService.findOne(+id);
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() updateArticleDto: UpdateArticleDto) {
-    return this.articleService.update(id, updateArticleDto);
+  update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
+    return this.articleService.update(+id, updateArticleDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.articleService.remove(id);
+  remove(@Param('id') id: string) {
+    return this.articleService.remove(+id);
   }
 }

@@ -17,6 +17,7 @@ export class ArticleService {
     article.description = createArticleDto.description;
     article.content = createArticleDto.content;
     article.author = createArticleDto.author;
+    article.tags = createArticleDto.tags || [];
     return this.articleRepository.save(article);
   }
 
@@ -29,10 +30,10 @@ export class ArticleService {
   }
 
   update(id: number, updateArticleDto: UpdateArticleDto) {
-
+    return this.articleRepository.update(id, updateArticleDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} article`;
+    return this.articleRepository.delete(id);
   }
 }

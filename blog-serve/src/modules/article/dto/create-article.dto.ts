@@ -3,4 +3,5 @@ export class CreateArticleDto {
   description: string;
   content: string;
   author: string;
+  tags?: string[];
 }
