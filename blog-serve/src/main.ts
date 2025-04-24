@@ -1,12 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import * as net from 'net';
+import { createServer } from 'node:net';
+import {TransformInterceptor} from "./interceptor/transform/transform.interceptor";
 
 // 检查端口是否可用
 async function isPortAvailable(port: number): Promise<boolean> {
   return new Promise((resolve) => {
-    const server = net.createServer();
+    const server = createServer();
     server.once('error', () => {
+      server.close();
       resolve(false);
     });
     server.once('listening', () => {
@@ -27,13 +29,16 @@ async function getAvailablePort(startPort: number): Promise<number> {
 }
 
 async function bootstrap() {
-  const startPort = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
+  const startPort = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
   const availablePort = await getAvailablePort(startPort);
-  
+
   const app = await NestFactory.create(AppModule);
+
+  app.useGlobalInterceptors(new TransformInterceptor())
+
   await app.listen(availablePort);
-  
-  console.log(`服务器运行在 http://localhost:${availablePort}`);
+
+  console.log(`The server is running at http://localhost:${availablePort}`);
 }
 
 bootstrap();
