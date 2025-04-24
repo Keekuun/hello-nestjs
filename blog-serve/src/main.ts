@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { createServer } from 'node:net';
 import {TransformInterceptor} from "./interceptor/transform/transform.interceptor";
+import {HttpExceptionFilter} from "./filters/http-exception/http-exception.filter";
 
 // 检查端口是否可用
 async function isPortAvailable(port: number): Promise<boolean> {
@@ -35,6 +36,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.useGlobalInterceptors(new TransformInterceptor())
+  app.useGlobalFilters(new HttpExceptionFilter())
 
   await app.listen(availablePort);
 
