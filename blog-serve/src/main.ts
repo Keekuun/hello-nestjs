@@ -35,7 +35,9 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
 
+  // 全局拦截器
   app.useGlobalInterceptors(new TransformInterceptor())
+  // 全局异常过滤器
   app.useGlobalFilters(new HttpExceptionFilter())
 
   await app.listen(availablePort);

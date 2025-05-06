@@ -5,6 +5,7 @@ export interface CommonResponse<T> {
   code: number;
   data: T;
   message: string;
+  ok: boolean;
 }
 
 // 全局拦截器，返回格式统一
@@ -15,6 +16,7 @@ export class TransformInterceptor implements NestInterceptor {
       code: 200,
       data,
       message: 'success',
+      ok: true,
     })));
   }
 }

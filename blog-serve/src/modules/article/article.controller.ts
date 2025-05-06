@@ -27,7 +27,12 @@ export class ArticleController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.articleService.findOne(+id);
+    // 参数校验
+    const articleId = Number(id);
+    if (!articleId) {
+      return null
+    }
+    return this.articleService.findOne(articleId);
   }
 
   @Put(':id')

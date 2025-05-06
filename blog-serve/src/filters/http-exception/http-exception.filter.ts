@@ -3,7 +3,7 @@ import {Response} from 'express';
 
 // 全局异常过滤器
 @Catch(HttpException)
-export class HttpExceptionFilter<T> implements ExceptionFilter {
+export class HttpExceptionFilter implements ExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
@@ -13,8 +13,10 @@ export class HttpExceptionFilter<T> implements ExceptionFilter {
     response
       .status(status)
       .json({
-        statusCode: status,
+        code: status,
         message,
+        data: null,
+        ok: false,
       });
   }
 }
