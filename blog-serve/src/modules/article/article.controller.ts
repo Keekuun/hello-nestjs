@@ -35,8 +35,18 @@ export class ArticleController {
     return this.articleService.findOne(articleId);
   }
 
+  // 更新文章
   @Post('update')
   update(@Body() updateArticleDto: UpdateArticleDto) {
+    // 参数校验
+    const articleId = Number(updateArticleDto.id);
+    if (!articleId) {
+      return null
+    }
+    // 如果没有其他参数，不需要更新
+    if (Object.keys(updateArticleDto).length === 1) {
+      return null
+    }
     return this.articleService.update(updateArticleDto);
   }
 

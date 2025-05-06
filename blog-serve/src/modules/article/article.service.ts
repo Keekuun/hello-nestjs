@@ -34,7 +34,8 @@ export class ArticleService {
   }
 
   update(updateArticleDto: UpdateArticleDto) {
-    return this.articleRepository.update(updateArticleDto.id, updateArticleDto);
+    const {id, ...updateData} = updateArticleDto;
+    return this.articleRepository.update(id, updateData);
   }
 
   remove(id: number) {

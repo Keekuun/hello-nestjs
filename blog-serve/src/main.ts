@@ -37,14 +37,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // 校验 class-validator
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true, // 移除未声明的属性
-    forbidNonWhitelisted: false, // 禁止未声明的属性
-    transform: true, // 转换类型
-    transformOptions: {
-      enableImplicitConversion: true, // 隐式转换类型
-    },
-  }))
+  app.useGlobalPipes(new ValidationPipe())
   // 全局拦截器
   app.useGlobalInterceptors(new TransformInterceptor())
   // 全局异常过滤器
