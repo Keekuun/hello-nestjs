@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Param,
   Query,
 } from '@nestjs/common';
 import {ArticleService} from './article.service';
