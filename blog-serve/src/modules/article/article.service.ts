@@ -33,8 +33,8 @@ export class ArticleService {
     return article;
   }
 
-  update(id: number, updateArticleDto: UpdateArticleDto) {
-    return this.articleRepository.update(id, updateArticleDto);
+  update(updateArticleDto: UpdateArticleDto) {
+    return this.articleRepository.update(updateArticleDto.id, updateArticleDto);
   }
 
   remove(id: number) {

@@ -3,19 +3,20 @@ import {
   Get,
   Post,
   Body,
-  Put,
   Param,
-  Delete,
+  Query,
 } from '@nestjs/common';
-import { ArticleService } from './article.service';
-import { CreateArticleDto } from './dto/create-article.dto';
-import { UpdateArticleDto } from './dto/update-article.dto';
+import {ArticleService} from './article.service';
+import {CreateArticleDto} from './dto/create-article.dto';
+import {UpdateArticleDto} from './dto/update-article.dto';
+import {IdDto} from "../../common/dto/id.dto";
 
 @Controller('article')
 export class ArticleController {
-  constructor(private readonly articleService: ArticleService) {}
+  constructor(private readonly articleService: ArticleService) {
+  }
 
-  @Post()
+  @Post('create')
   create(@Body() createArticleDto: CreateArticleDto) {
     return this.articleService.create(createArticleDto);
   }
@@ -25,23 +26,28 @@ export class ArticleController {
     return this.articleService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @Get('detail')
+  findOne(@Query('id') idDto: IdDto) {
     // 参数校验
-    const articleId = Number(id);
+    const articleId = Number(idDto.id);
     if (!articleId) {
       return null
     }
     return this.articleService.findOne(articleId);
   }
 
-  @Put(':id')
-  update(@Param('id') id: string, @Body() updateArticleDto: UpdateArticleDto) {
-    return this.articleService.update(+id, updateArticleDto);
+  @Post('update')
+  update(@Body() updateArticleDto: UpdateArticleDto) {
+    return this.articleService.update(updateArticleDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.articleService.remove(+id);
+  @Post('delete')
+  remove(@Body() idDto: IdDto) {
+    // 参数校验
+    const articleId = Number(idDto.id);
+    if (!articleId) {
+      return null
+    }
+    return this.articleService.remove(articleId);
   }
 }

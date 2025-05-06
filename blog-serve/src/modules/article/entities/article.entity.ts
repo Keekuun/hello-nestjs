@@ -1,4 +1,4 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, VersionColumn} from "typeorm";
+import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
 
 @Entity()
 export class Article {
@@ -21,22 +21,6 @@ export class Article {
   // 文章作者
   @Column('varchar')
   author: string;
-
-  // 创建时间
-  @CreateDateColumn()
-  createTime: Date;
-
-  // 更新时间
-  @UpdateDateColumn()
-  updateTime: Date;
-
-  // 是否删除
-  @Column({type: 'boolean', default: false})
-  isDeleted: boolean;
-
-  // 版本控制
-  @VersionColumn()
-  version: number;
 
   // 文章标签
   @Column('simple-array', { nullable: true })

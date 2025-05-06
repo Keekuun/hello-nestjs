@@ -50,7 +50,7 @@ describe('ArticleController', () => {
     it('should return a single article', async () => {
       const articleId = 1;
       const result = { id: articleId, title: 'Test Article' };
-      expect(await controller.findOne(articleId)).toEqual(result);
+      expect(await controller.findOne({id: articleId})).toEqual(result);
     });
   });
 
@@ -58,7 +58,7 @@ describe('ArticleController', () => {
     it('should remove an article', async () => {
       const articleId = 1;
       const result = { id: articleId, title: 'Test Article' };
-      expect(await controller.remove(articleId)).toEqual(result);
+      expect(await controller.remove({id: articleId})).toEqual(result);
     });
   });
 });
