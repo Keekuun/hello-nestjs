@@ -1,7 +1,3 @@
-export class CreateArticleDto {
-  title: string;
-  description: string;
-  content: string;
-  author: string;
-  tags?: string[];
-}
+import {ArticleDto} from "./article.dto";
+
+export class CreateArticleDto extends ArticleDto  {}
