@@ -26,7 +26,7 @@ export class ArticleController {
   }
 
   @Get('detail')
-  findOne(@Query('id') idDto: IdDto) {
+  findOne(@Query() idDto: IdDto) {
     // 参数校验
     const articleId = Number(idDto.id);
     if (!articleId) {
