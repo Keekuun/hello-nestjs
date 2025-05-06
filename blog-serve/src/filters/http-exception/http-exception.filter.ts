@@ -8,7 +8,19 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const status = exception.getStatus();
-    const message = exception.message;
+    let message = exception.message;
+    // 获取class-validator的错误信息
+    const exceptionResponse = exception.getResponse();
+    if (typeof exceptionResponse === 'object' && 'message' in exceptionResponse) {
+      const errorMessage = exceptionResponse['message'];
+      if (Array.isArray(errorMessage)) {
+        // 如果是数组，取第一个错误信息
+        message = errorMessage[0] || message;
+      } else if (typeof errorMessage === 'string') {
+        // 如果是字符串，直接使用
+        message = errorMessage || message;
+      }
+    }
 
     response
       .status(status)
