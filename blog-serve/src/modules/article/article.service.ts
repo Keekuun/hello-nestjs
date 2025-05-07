@@ -1,7 +1,7 @@
 import {Injectable, NotFoundException} from '@nestjs/common';
-import { CreateArticleDto } from './dto/create-article.dto';
-import { UpdateArticleDto } from './dto/update-article.dto';
-import { Article } from './entities/article.entity';
+import {CreateArticleDto} from './dto/create-article.dto';
+import {UpdateArticleDto} from './dto/update-article.dto';
+import {Article} from './entities/article.entity';
 import {Repository} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
 
@@ -33,9 +33,13 @@ export class ArticleService {
     return article;
   }
 
-  update(updateArticleDto: UpdateArticleDto) {
-    const {id, ...updateData} = updateArticleDto;
-    return this.articleRepository.update(id, updateData);
+  async update(updateArticleDto: UpdateArticleDto) {
+    const article = await this.articleRepository.findOneBy({id: updateArticleDto.id});
+    if (!article) {
+      throw new NotFoundException('Article not found');
+    }
+    Object.assign(article, updateArticleDto);
+    return this.articleRepository.save(article);
   }
 
   remove(id: number) {

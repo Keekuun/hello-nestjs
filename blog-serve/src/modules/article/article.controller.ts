@@ -43,10 +43,6 @@ export class ArticleController {
     if (!articleId) {
       return null
     }
-    // 如果没有其他参数，不需要更新
-    if (Object.keys(updateArticleDto).length === 1) {
-      return null
-    }
     return this.articleService.update(updateArticleDto);
   }
 
