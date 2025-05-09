@@ -1,11 +1,8 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Common} from "@/common/entity/common.entity";
 
 @Entity()
-export class Article {
-  // 文章id
-  @PrimaryGeneratedColumn() // 自增id
-  id: number;
-
+export class Article extends Common {
   // 文章标题
   @Column({type: 'varchar', length: 500})
   title: string;
@@ -19,10 +16,10 @@ export class Article {
   content: string;
 
   // 文章作者
-  @Column('varchar')
+  @Column({type: 'varchar', length: 100})
   author: string;
 
   // 文章标签
-  @Column('simple-array', { nullable: true })
+  @Column('simple-array', {nullable: true})
   tags: string[];
 }

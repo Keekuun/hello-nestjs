@@ -9,6 +9,7 @@ import {ArticleService} from './article.service';
 import {CreateArticleDto} from './dto/create-article.dto';
 import {UpdateArticleDto} from './dto/update-article.dto';
 import {IdDto} from "../../common/dto/id.dto";
+import {ArticleListDto} from "@/modules/article/dto/article-list.dto";
 
 @Controller('article')
 export class ArticleController {
@@ -21,7 +22,7 @@ export class ArticleController {
   }
 
   @Get('list')
-  findAll() {
+  findAll(@Query() articleListDto: ArticleListDto) {
     return this.articleService.findAll();
   }
 

@@ -17,6 +17,8 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      autoLoadEntities: true,
+      // todo 生产环境请设置为 false
       synchronize: true,
       namingStrategy: new SnakeNamingStrategy(),
     }),
