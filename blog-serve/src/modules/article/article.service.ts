@@ -10,7 +10,9 @@ export class ArticleService {
   constructor(
     @InjectRepository(Article)
     private readonly articleRepository: Repository<Article>,
-  ) {}
+  ) {
+  }
+
   create(createArticleDto: CreateArticleDto): Promise<Article> {
     const article = new Article();
     article.title = createArticleDto.title;
@@ -26,7 +28,7 @@ export class ArticleService {
   }
 
   async findOne(id: number) {
-    const article = await this.articleRepository.findOneBy({id});
+    const article = await this.articleRepository.createQueryBuilder('article').where('article.id = :id', {id}).getOne();
     if (!article) {
       throw new NotFoundException('Article not found');
     }

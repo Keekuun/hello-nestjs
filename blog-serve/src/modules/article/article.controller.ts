@@ -3,7 +3,7 @@ import {
   Get,
   Post,
   Body,
-  Query,
+  Query, NotFoundException, BadRequestException,
 } from '@nestjs/common';
 import {ArticleService} from './article.service';
 import {CreateArticleDto} from './dto/create-article.dto';
@@ -30,7 +30,7 @@ export class ArticleController {
     // 参数校验
     const articleId = Number(idDto.id);
     if (!articleId) {
-      return null
+      throw new BadRequestException('Article id is required');
     }
     return this.articleService.findOne(articleId);
   }
