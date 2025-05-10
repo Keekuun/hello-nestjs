@@ -23,15 +23,18 @@ export class ArticleController {
 
   @Get('list')
   findAll(@Query() articleListDto: ArticleListDto) {
-    return this.articleService.findAll();
+    const pageNum = Number(articleListDto.pageNum) || 1;
+    const pageSize = Number(articleListDto.pageSize) || 10;
+    
+    return this.articleService.findAll(pageNum, pageSize);
   }
 
   @Get('detail')
   findOne(@Query() idDto: IdDto) {
     // 参数校验
     const articleId = Number(idDto.id);
-    if (!articleId) {
-      throw new BadRequestException('Article id is required');
+    if (!articleId || articleId <= 0) {
+      throw new BadRequestException('Article id is invalid');
     }
     return this.articleService.findOne(articleId);
   }

@@ -23,8 +23,27 @@ export class ArticleService {
     return this.articleRepository.save(article);
   }
 
-  findAll() {
-    return this.articleRepository.find();
+  async findAll(pageNum: number = 1, pageSize: number = 10) {
+    const skip = (pageNum - 1) * pageSize;
+    
+    const [items, total] = await Promise.all([
+      this.articleRepository.find({
+        skip,
+        take: pageSize,
+        order: {
+          createTime: 'DESC'
+        }
+      }),
+      this.articleRepository.count()
+    ]);
+  
+    return {
+      items,
+      total,
+      pageNum,
+      pageSize,
+      pageTotal: Math.ceil(total / pageSize)
+    };
   }
 
   async findOne(id: number) {
