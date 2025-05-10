@@ -133,7 +133,7 @@ describe('ArticleController', () => {
       
       const errorResponse = {
         error: "Bad Request",
-        message: "Article id is required",
+        message: "Article id is invalid",
         statusCode: 400,
       };
       
