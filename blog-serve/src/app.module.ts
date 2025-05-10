@@ -3,12 +3,12 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ArticleModule } from './modules/article/article.module';
-import {TypeOrmModule} from "@nestjs/typeorm";
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath: '.env', cache: true, }),
+    ConfigModule.forRoot({ envFilePath: '.env', cache: true }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DB_HOST,
@@ -22,7 +22,7 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
       synchronize: true,
       namingStrategy: new SnakeNamingStrategy(),
     }),
-    ArticleModule
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
