@@ -1,6 +1,7 @@
 import {Column, Entity} from "typeorm";
 import {Common} from "@/common/entity/common.entity";
 
+// @Entity 会将这个类映射为数据库表
 @Entity()
 export class Article extends Common {
   // 文章标题

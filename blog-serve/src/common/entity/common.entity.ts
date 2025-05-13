@@ -4,10 +4,9 @@ import {
   UpdateDateColumn,
   CreateDateColumn,
   VersionColumn,
-  Entity,
 } from 'typeorm';
 
-@Entity()
+// 注意：此处不要使用 @Entity 否则会创建 common 表
 export abstract class Common {
   // 主键id
   @PrimaryGeneratedColumn()
