@@ -1,7 +1,5 @@
 import { DataSource } from 'typeorm';
 
-import options from '@/config/database';
+import getTypeOrmConfig from "@/config/typeorm";
 
-import type { DataSourceOptions } from 'typeorm';
-
-export default new DataSource(options as DataSourceOptions);
+export default new DataSource(getTypeOrmConfig());

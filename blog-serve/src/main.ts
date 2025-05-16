@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { AppModule } from '@/app/app.module';
 import { createServer } from 'node:net';
 import { TransformInterceptor } from './interceptor/transform/transform.interceptor';
 import { HttpExceptionFilter } from './filters/http-exception/http-exception.filter';
@@ -31,7 +31,7 @@ async function getAvailablePort(startPort: number): Promise<number> {
 }
 
 async function bootstrap() {
-  const startPort = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+  const startPort = process.env.APP_PORT ? parseInt(process.env.APP_PORT, 10) : 3000;
   const availablePort = await getAvailablePort(startPort);
 
   const app = await NestFactory.create(AppModule);
