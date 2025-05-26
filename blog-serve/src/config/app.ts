@@ -1,4 +1,5 @@
-export default {
+export default () => ({
+  env: String(process.env.APP_ENV) || 'development',
   name: String(process.env.APP_NAME),
   host: String(process.env.APP_HOST),
   port: Number(process.env.APP_PORT),
@@ -10,4 +11,4 @@ export default {
       expiresIn: Number(process.env.APP_JWT_EXPIRES),
     },
   },
-};
+}) as const;

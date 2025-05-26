@@ -1,4 +1,4 @@
-export default {
+export default () => ({
   // todo 接入 RabbitMQ
   enable: process.env.RMQ_ENABLE === 'true',
   options: {
@@ -6,7 +6,7 @@ export default {
     queue: 'nestjs_demo_queue',
     prefetchCount: 1,
     noAck: false,
-    queueOptions: { durable: false },
-    socketOptions: { noDelay: true },
+    queueOptions: {durable: false},
+    socketOptions: {noDelay: true},
   },
-};
+}) as const;
