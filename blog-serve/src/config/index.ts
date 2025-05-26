@@ -1,23 +1,15 @@
 import { ConfigModuleOptions } from '@nestjs/config';
 
 import appConfig from './app';
-import typeOrmConfig from './typeorm';
+import typeormConfig from './typeorm';
 import rmqConfig from './rmq';
 import swaggerConfig from './swagger';
-export { appConfig, typeOrmConfig, rmqConfig, swaggerConfig };
 
-export type AppConfigType = typeof appConfig;
-export type TypeormConfigType = typeof typeOrmConfig;
-export type RMQConfig = typeof rmqConfig;
-export type SwaggerConfig = typeof swaggerConfig;
-
-
-
-enum Config {
-  App = 'APP',
-  Typeorm = 'TYPEORM',
-  RMQ = 'RMQ',
-  Swagger = 'SWAGGER',
+const Config = {
+  App: 'APP',
+  Typeorm: 'typeorm',
+  RMQ: 'RMQ',
+  Swagger: 'SWAGGER',
 }
 
 export const configModuleOptions: ConfigModuleOptions = {
@@ -28,10 +20,10 @@ export const configModuleOptions: ConfigModuleOptions = {
   // 是否忽略环境变量文件
   ignoreEnvFile: false,
   load: [
-    () => ({[Config.App]: appConfig()}),
-    () => ({[Config.Typeorm]: typeOrmConfig()}),
-    () => ({[Config.RMQ]: rmqConfig()}),
-    () => ({[Config.Swagger]: swaggerConfig()}),
+    appConfig,
+    typeormConfig,
+    rmqConfig,
+    swaggerConfig,
   ],
   cache: true
 };

@@ -1,4 +1,6 @@
-export default () => ({
+import { registerAs } from '@nestjs/config';
+
+export default registerAs('app', () => ({
   env: String(process.env.APP_ENV) || 'development',
   name: String(process.env.APP_NAME),
   host: String(process.env.APP_HOST),
@@ -11,4 +13,4 @@ export default () => ({
       expiresIn: Number(process.env.APP_JWT_EXPIRES),
     },
   },
-}) as const;
+}));

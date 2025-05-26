@@ -1,7 +1,8 @@
+import {registerAs} from '@nestjs/config';
 import {PostgresConnectionOptions} from "typeorm/driver/postgres/PostgresConnectionOptions";
 import {TypeOrmModuleOptions} from "@nestjs/typeorm/dist/interfaces/typeorm-options.interface";
 
-export default (): TypeOrmModuleOptions & Partial<PostgresConnectionOptions> => ({
+export default registerAs('typeorm', (): TypeOrmModuleOptions & Partial<PostgresConnectionOptions> => ({
   type: String(process.env.DB_TYPE) as 'postgres',
   host: String(process.env.DB_HOST),
   port: Number(process.env.DB_PORT),
@@ -14,6 +15,6 @@ export default (): TypeOrmModuleOptions & Partial<PostgresConnectionOptions> => 
   synchronize: process.env.DB_SYNCHRONIZE === 'true',
   dropSchema: process.env.DB_DROP_SCHEMA === 'true',
   // https://docs.nestjs.com/techniques/database#auto-load-entities
-  autoLoadEntities: process.env.DB_AUTO_LOAD_ENTITIES === 'true',
+  autoLoadEntities: true,
   useUTC: true,
-}) as const;
+}));

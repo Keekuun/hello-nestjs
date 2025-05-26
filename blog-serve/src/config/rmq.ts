@@ -1,4 +1,6 @@
-export default () => ({
+import { registerAs } from '@nestjs/config';
+
+export default registerAs('rmq', () => ({
   // todo 接入 RabbitMQ
   enable: process.env.RMQ_ENABLE === 'true',
   options: {
@@ -9,4 +11,4 @@ export default () => ({
     queueOptions: {durable: false},
     socketOptions: {noDelay: true},
   },
-}) as const;
+}));
