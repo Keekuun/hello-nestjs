@@ -12,6 +12,7 @@ export default registerAs('typeorm', (): TypeOrmModuleOptions & Partial<Postgres
   logging: process.env.DB_LOGGING === 'true',
   migrations: process.env.DB_MIGRATIONS?.split(','),
   migrationsRun: process.env.DB_MIGRATIONS_RUN === 'true',
+  // 生产模式同步一定要设置为 false
   synchronize: process.env.DB_SYNCHRONIZE === 'true',
   dropSchema: process.env.DB_DROP_SCHEMA === 'true',
   // https://docs.nestjs.com/techniques/database#auto-load-entities
