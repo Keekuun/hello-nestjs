@@ -5,6 +5,7 @@ import {AppService} from './app.service';
 import {ArticleModule} from "@/modules/article/article.module";
 import {TypeOrmModule, TypeOrmModuleOptions} from "@nestjs/typeorm";
 import Config, {configModuleOptions} from "@/config";
+import {UserModule} from "@/modules/user/user.module";
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import Config, {configModuleOptions} from "@/config";
         configService.get(Config.Typeorm) as TypeOrmModuleOptions,
     }),
     ArticleModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

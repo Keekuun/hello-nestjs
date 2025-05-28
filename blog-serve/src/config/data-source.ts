@@ -1,4 +1,5 @@
-import {DataSource} from 'typeorm';
+import 'tsconfig-paths/register'; // 添加路径别名解析支持
+import { DataSource } from 'typeorm';
 import * as dotenv from 'dotenv';
 
 import getTypeOrmConfig from "../config/typeorm";

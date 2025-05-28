@@ -18,9 +18,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "typeorm-ts-node-commonjs -d src/migrations/dataSource.ts",
-    "typeorm:create": "typeorm-ts-node-commonjs migration:create src/migrations/init",
-    "typeorm:generate": "npm run typeorm -- migration:generate src/migrations/generate",
+    "db:sync": "nest build && typeorm-ts-node-commonjs -d src/config/dataSource.ts schema:sync",
+    "typeorm": "typeorm-ts-node-commonjs -d src/config/data-source.ts",
+    "typeorm:create": "typeorm-ts-node-commonjs migration:create src/migrations/test",
+    "typeorm:generate": "npm run typeorm -- migration:generate src/migrations/add-user-table",
     "typeorm:run": "npm run typeorm -- migration:run ",
     "typeorm:revert": "npm run typeorm -- migration:revert"
   },

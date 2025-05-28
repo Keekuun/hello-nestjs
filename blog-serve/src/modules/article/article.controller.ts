@@ -8,7 +8,7 @@ import {
 import {ArticleService} from './article.service';
 import {CreateArticleDto} from './dto/create-article.dto';
 import {UpdateArticleDto} from './dto/update-article.dto';
-import {IdDto} from "../../common/dto/id.dto";
+import {IdDto} from "@/common/dto/id.dto";
 import {ArticleListDto} from "@/modules/article/dto/article-list.dto";
 
 @Controller('article')
@@ -25,7 +25,7 @@ export class ArticleController {
   findAll(@Query() articleListDto: ArticleListDto) {
     const pageNum = Number(articleListDto.pageNum) || 1;
     const pageSize = Number(articleListDto.pageSize) || 10;
-    
+
     return this.articleService.findAll(pageNum, pageSize);
   }
 
